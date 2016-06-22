@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Tic-Tac-Toe by FatumFL
+# v0.1
 
 board = [[None,None,None], [None,None,None], [None,None,None]] # Gameboard
 player = '' # Stores mark of the player
