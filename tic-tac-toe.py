@@ -1,15 +1,90 @@
 #!/usr/bin/env python3
 # Tic-Tac-Toe by FatumFL
-# v0.1
+# v0.1.1
 
-board = [[None,None,None], [None,None,None], [None,None,None]] # Gameboard
+class Board(object):
+	# Gameboard
+	
+	def __init__ (self):
+		self.board = [0, None, None, None, None, None, None, None, None, None] # Initializing board in class instances
+	
+	def add_mark(self, i, mark):
+		# Add given mark to the board
+		self.board[i] = mark
+	
+	def print_board(self):
+		# Printing board to stdout
+		for i in range(1, 10):
+			if self.board[i] is None:
+				print('_', end=' ')
+			else:
+				print(self.board[i], end=' ')
+			if i % 3 == 0:
+				print()
+	
+	def check_board(self):
+		# Is there a winner? Let me check...
+		if self.board[1] == self.board[2] == self.board[3] != None: # first row
+			self.board[0] = self.board[1]
+		elif self.board[4] == self.board[5] == self.board[6] != None: # second row
+			self.board[0] = self.board[4]
+		elif self.board[7] == self.board[8] == self.board[9] != None: # third row
+			self.board[0] = self.board[7]
+		elif self.board[1] == self.board[4] == self.board[7] != None: # first column
+			self.board[0] = self.board[1]
+		elif self.board[2] == self.board[5] == self.board[8] != None: # second column
+			self.board[0] = self.board[2]
+		elif self.board[3] == self.board[6] == self.board[9] != None: # third column
+			self.board[0] = self.board[3]
+		elif self.board[1] == self.board[5] == self.board[9] != None: # diagonal from left to right
+			self.board[0] = self.board[1]
+		elif self.board[3] == self.board[5] == self.board[7] != None: # diagonal from right to left
+			self.board[0] = self.board[3]
+		elif None not in self.board: # if board is full it's a tie
+			self.board[0] = "tie"
+		return self.board[0]
+	
+	def list_empty_cells(self):
+		# Return a list of empty cells
+		return [i for i in range(1, 10) if self.board[i] is None]
+	
+	def copy_board(self):
+		# Returns a copy of the board
+		return self.board[1:]
+	
+	def store_board(self):
+		# Writes game result to a file
+		if self.board[0]:
+			db = open("rounds.text", mode="a")
+			print(self.board, file=db)
+			db.close()
+			return True
+		else:
+			return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 player = '' # Stores mark of the player
 comp = '' # Stores mark of the computer
 turn = 0 # Defines the order: 0 - player turn, 1 - comp turn
 
 def greeting():
 	# Defines who goes first and prints greeting.
-	from random import choice
+	from random import choice, radint
+	
 	player = choice(['X', 'O'])
 	if player == 'X':
 		print("Hello, Mr. X! Make the first move.")
