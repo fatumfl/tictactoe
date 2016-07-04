@@ -125,6 +125,7 @@ def main():
 			cell = comp_ai.ai_turn(empty_cells)
 			gameboard.add_mark(cell, comp)
 			turn = 0
+			print("\nLet me choose this one:")
 		gameboard.print_board()
 
 if __name__ == "__main__":
