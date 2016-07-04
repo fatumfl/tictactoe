@@ -2,6 +2,8 @@
 # Tic-Tac-Toe by FatumFL
 # v0.1.1
 
+from random import choice, randint
+
 class Board(object):
 	# Gameboard
 	
@@ -9,7 +11,7 @@ class Board(object):
 		self.board = [0, None, None, None, None, None, None, None, None, None] # Initializing board in class instances
 	
 	def add_mark(self, i, mark):
-		# Add given mark to the board
+		# Add given mark to the specified cell of the board
 		self.board[i] = mark
 	
 	def print_board(self):
@@ -52,19 +54,39 @@ class Board(object):
 		# Returns a copy of the board
 		return self.board[1:]
 	
-	def store_board(self):
-		# Writes game result to a file
+	def store_board(self, winner):
+		# Writes game result to a file. Winner should be either 0 or 1.
 		if self.board[0]:
 			db = open("rounds.text", mode="a")
-			print(self.board, file=db)
+			print(self.board, '\t', winner, file=db)
 			db.close()
 			return True
 		else:
 			return False
 
+class AI(object):
+	# Your rival
+	
+	def __init__(self):
+		self.lvl = 1
+	
+	def _easy(self, empty_cells):
+		move = choice(empty_cells)
+		return move
 
+	def _medium(self, board):
+		pass
 
-
+	def _hard(self, board):
+		pass
+	
+	def ai_turn(self, data):
+		if self.lvl == 1:
+			return self._easy(data)
+		if self.lvl == 2:
+			return self._medium(data)
+		if self.lvl == 3:
+			return self._hard(data)
 
 
 
