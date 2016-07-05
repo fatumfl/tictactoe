@@ -116,16 +116,14 @@ def greeting():
 	return player, comp, next_one
 
 def players_move(empty_cells):
-	# There is a bug that allows to remark already used cells. Recursion...
 	cell = int(input(msg[4]))
 	if cell > 9 or cell < 1:
 		print(msg[5])
-		players_move(empty_cells)
+		cell = players_move(empty_cells)
 	elif cell not in empty_cells:
 		print(msg[6])
-		players_move(empty_cells)
-	else:
-		return cell
+		cell = players_move(empty_cells)
+	return cell
 
 def new_game_plus():
 	if input(msg[12]).lower().startswith('y'):
