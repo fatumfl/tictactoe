@@ -4,6 +4,20 @@
 
 from random import choice
 
+msg = { # Applies a dictionary of all in-game messages.
+	1:"\nHello, Mr. {}!",
+	2:"You're first!",
+	3:"I'm first!",
+	4:"Please enter number of the cell [1-9]: ",
+	5:"There is no such cell number. Max is 9, min is 1.",
+	6:"There is already mark in this cell.",
+	7:"It's my turn.",
+	8:"Let me think... I'll choose this one:",
+	9:"Game Over!",
+	10:"You win!",
+	11:"You lose!",
+	12:"Want to start a new game (y/n)? "}
+
 class Board(object):
 	# Gameboard
 	
@@ -87,51 +101,34 @@ class AI(object):
 		if self.lvl == 3:
 			return self._hard(data)
 
-def message(msg_id):
-	# Applies a dictionary of all in-game messages. Will be deprecated in later versions.
-	
-	msg = {
-	1:"\nHello, Mr. {}!",
-	2:"You're first!",
-	3:"I'm first!",
-	4:"Please enter number of the cell [1-9]: ",
-	5:"There is no such cell number. Max is 9, min is 1.",
-	6:"There is already mark in this cell.",
-	7:"It's my turn.",
-	8:"Let me think... I'll choose this one:",
-	9:"Game Over!",
-	10:"You win!",
-	11:"You lose!",
-	12:"Want to start a new game (y/n)? "}
-	
-	return msg[msg_id]
-
 def greeting():
 	# Defines who goes first and prints greeting.
 	player = choice(['X', 'O'])
 	if player == 'X':
-		print(message(1).format(player), message(2))
+		print(msg[1].format(player), msg[2])
 		comp = 'O'
 		next_one = 0
 	else:
-		print(message(1).format(player))
-		print(message(3))
+		print(msg[1].format(player))
+		print(msg[3])
 		comp = 'X'
 		next_one = 1
 	return player, comp, next_one
 
 def players_move(empty_cells):
-	cell = int(input(message(4)))
+	# There is a bug that allows to remark already used cells. Recursion...
+	cell = int(input(msg[4]))
 	if cell > 9 or cell < 1:
-		print(message(5))
+		print(msg[5])
 		players_move(empty_cells)
 	elif cell not in empty_cells:
-			print(message(6))
-			players_move(empty_cells)
-	return cell
+		print(msg[6])
+		players_move(empty_cells)
+	else:
+		return cell
 
 def new_game_plus():
-	if input(message(12)).lower().startswith('y'):
+	if input(msg[12]).lower().startswith('y'):
 		main()
 
 def main():
@@ -150,14 +147,14 @@ def main():
 			gameboard.add_mark(cell, comp)
 			turn = 0
 			print()
-			print(message(8))
+			print(msg[8])
 		gameboard.print_board()
 	
-	print('\n' + message(9), end=' ')
+	print('\n' + msg[9], end=' ')
 	if gameboard.check_board() == player:
-		print(message(10))
+		print(msg[10])
 	else:
-		print(message(11))
+		print(msg[11])
 	new_game_plus()
 
 if __name__ == "__main__":
