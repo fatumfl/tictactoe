@@ -3,6 +3,7 @@
 # v0.1.4
 
 from random import choice
+from sys import exit
 
 msg = { # Applies a dictionary of all in-game messages.
 	1:"\nHello, Mr. {}!",
@@ -19,7 +20,9 @@ msg = { # Applies a dictionary of all in-game messages.
 	12:"It's a tie!",
 	13:"Want to start a new game (y/n)? ",
 	14:"Input should be integer.",
-	15:"Select game level: 1 - easy, 2 - normal, 3 - hard > "}
+	15:"Select game level: 1 - easy, 2 - normal, 3 - hard > ",
+	16:"Wrong input. Try again.",
+	17:"There is no such level."}
 
 class Board(object):
 	# Gameboard
@@ -137,9 +140,19 @@ class AI(object):
 		elif self.lvl == 3:
 			return self._normal(board) or self._hard(cells)
 
+def game_lvl():
+	try:
+		lvl = int(input(msg[15]))
+	except:
+		print(msg[16])
+		return game_lvl()
+	if lvl > 3 or lvl < 1:
+		print(msg[17])
+		return game_lvl()
+	return lvl
+
 def greeting():
 	# Defines who goes first and prints greeting.
-	lvl = int(input(msg[15]))
 	player = choice(['X', 'O'])
 	if player == 'X':
 		print(msg[1].format(player), msg[2])
@@ -150,11 +163,17 @@ def greeting():
 		print(msg[3])
 		comp = 'X'
 		next_one = 1
-	return player, comp, next_one, lvl
+	return player, comp, next_one
 
 def players_move(empty_cells):
-	
-	cell = int(input(msg[4]))
+	cell = input(msg[4])
+	if cell.startswith('q'):
+		exit(0)
+	try:
+		cell = int(cell)
+	except:
+		print(msg[16])
+		cell = players_move(empty_cells)
 	if cell > 9 or cell < 1:
 		print(msg[5])
 		cell = players_move(empty_cells)
@@ -171,9 +190,9 @@ def main():
 	gameboard = Board()
 	comp_ai = AI()
 	print()
-	player, comp, turn, lvl = greeting()
+	player, comp, turn = greeting()
 	comp_ai.mark = comp
-	comp_ai.lvl = lvl
+	comp_ai.lvl = game_lvl()
 	
 	while gameboard.check_board() == 0:
 		board = gameboard.copy_board()
