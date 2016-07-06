@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Tic-Tac-Toe by FatumFL
-# v0.1.3
+# v0.1.4
 
 from random import choice
 
@@ -16,7 +16,10 @@ msg = { # Applies a dictionary of all in-game messages.
 	9:"Game Over!",
 	10:"You win!",
 	11:"You lose!",
-	12:"Want to start a new game (y/n)? "}
+	12:"It's a tie!",
+	13:"Want to start a new game (y/n)? ",
+	14:"Input should be integer.",
+	15:"Select game level: 1 - easy, 2 - normal, 3 - hard > "}
 
 class Board(object):
 	# Gameboard
@@ -66,7 +69,7 @@ class Board(object):
 	
 	def copy_board(self):
 		# Returns a copy of the board
-		return self.board[1:]
+		return self.board[:]
 	
 	def store_board(self, winner):
 		# Writes game result to a file. Winner should be either 0 or 1.
@@ -79,30 +82,64 @@ class Board(object):
 
 class AI(object):
 	# Your rival
+	# AI logick defined in functions _easy, _normal and _hard
 	
 	def __init__(self):
-		self.lvl = 1
+		self.lvl = 1 # Defines game level
+		self.mark = ''
 	
-	def _easy(self, empty_cells):
-		cell = choice(empty_cells)
+	def _easy(self, cells):
+		# Easy game level.
+		cell = choice(cells)
 		return cell
 
-	def _medium(self, board):
-		pass
+	def _normal(self, board):
+		# Medium game level.
+		localboard = Board()
+		localboard.board = board[:]
+		empty_cells = localboard.list_empty_cells()
+		
+		for i in empty_cells:
+			localboard.board = board[:]
+			localboard.add_mark(i, self.mark)
+			if localboard.check_board() == self.mark:
+				return i
+		
+		pl = "XO".replace(self.mark, '')
+		for i in empty_cells:
+			localboard.board = board[:]
+			localboard.add_mark(i, pl)
+			if localboard.check_board() == pl:
+				return i
 
-	def _hard(self, board):
-		pass
+
+	def _hard(self, cells):
+		# Hard game level.
+		corner = list({1,3,7,9} & set(cells))
+		sides = list({2,4,6,8} & set(cells))
+		if 5 in cells:
+			return 5
+		elif corner:
+			return choice(corner)
+		elif sides:
+			return choice(sides)
+		
 	
-	def ai_turn(self, data):
+	def ai_turn(self, board):
+		# Supports AI logic
+	
+		cells = [i for i in range(1, 10) if board[i] is None]
+
 		if self.lvl == 1:
-			return self._easy(data)
-		if self.lvl == 2:
-			return self._medium(data)
-		if self.lvl == 3:
-			return self._hard(data)
+			return self._easy(cells)
+		elif self.lvl == 2:
+			return self._normal(board) or self._easy(cells)
+		elif self.lvl == 3:
+			return self._normal(board) or self._hard(cells)
 
 def greeting():
 	# Defines who goes first and prints greeting.
+	lvl = int(input(msg[15]))
 	player = choice(['X', 'O'])
 	if player == 'X':
 		print(msg[1].format(player), msg[2])
@@ -113,9 +150,10 @@ def greeting():
 		print(msg[3])
 		comp = 'X'
 		next_one = 1
-	return player, comp, next_one
+	return player, comp, next_one, lvl
 
 def players_move(empty_cells):
+	
 	cell = int(input(msg[4]))
 	if cell > 9 or cell < 1:
 		print(msg[5])
@@ -126,33 +164,44 @@ def players_move(empty_cells):
 	return cell
 
 def new_game_plus():
-	if input(msg[12]).lower().startswith('y'):
+	if input(msg[13]).lower().startswith('y'):
 		main()
 
 def main():
 	gameboard = Board()
 	comp_ai = AI()
-	player, comp, turn = greeting()
+	print()
+	player, comp, turn, lvl = greeting()
+	comp_ai.mark = comp
+	comp_ai.lvl = lvl
 	
 	while gameboard.check_board() == 0:
-		empty_cells = gameboard.list_empty_cells()
+		board = gameboard.copy_board()
+		cells = gameboard.list_empty_cells()
 		if turn == 0:
-			cell = players_move(empty_cells)
+			cell = players_move(cells)
 			gameboard.add_mark(cell, player)
 			turn = 1
 		else:
-			cell = comp_ai.ai_turn(empty_cells)
+			cell = comp_ai.ai_turn(board)
 			gameboard.add_mark(cell, comp)
 			turn = 0
 			print()
 			print(msg[8])
 		gameboard.print_board()
 	
+	winner = gameboard.check_board()
 	print('\n' + msg[9], end=' ')
-	if gameboard.check_board() == player:
+	if winner == player:
+		gameboard.store_board("player")
 		print(msg[10])
-	else:
+	if winner == comp:
+		gameboard.store_board("AI")
 		print(msg[11])
+	if winner == "tie":
+		gameboard.store_board(winner)
+		print(msg[12])
+	
 	new_game_plus()
 
 if __name__ == "__main__":
