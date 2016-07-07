@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Tic-Tac-Toe by FatumFL
-# v0.2
+# v0.2.1
 
 from random import choice
 from sys import exit
@@ -9,20 +9,21 @@ msg = { # Applies a dictionary of all in-game messages.
 	1:"\nHello, Mr. {}!",
 	2:"You're first!",
 	3:"I'm first!",
-	4:"Please enter number of the cell [1-9]: ",
+	4:"\nPlease enter number of the cell [1-9]: ",
 	5:"There is no such cell number. Max is 9, min is 1.",
 	6:"There is already mark in this cell.",
-	7:"It's my turn.",
-	8:"Let me think... I'll choose this one:",
+	7:"\nIt's my turn.",
+	8:"\nLet me think... I'll choose this one:",
 	9:"Game Over!",
 	10:"You win!",
 	11:"You lose!",
 	12:"It's a tie!",
 	13:"Want to start a new game (y/n)? ",
 	14:"Input should be integer.",
-	15:"Select game level: 1 - easy, 2 - normal, 3 - hard > ",
+	15:"\nSelect game level: 1 - easy, 2 - normal, 3 - hard > ",
 	16:"Wrong input. Try again.",
-	17:"There is no such level."}
+	17:"There is no such level.",
+	18:"Type 'q' to quiet."}
 
 class Board(object):
 	# Gameboard
@@ -189,10 +190,9 @@ def new_game_plus():
 def main():
 	gameboard = Board()
 	comp_ai = AI()
-	print()
+	comp_ai.lvl = game_lvl()
 	player, comp, turn = greeting()
 	comp_ai.mark = comp
-	comp_ai.lvl = game_lvl()
 	
 	while gameboard.check_board() == 0:
 		board = gameboard.copy_board()
@@ -205,7 +205,6 @@ def main():
 			cell = comp_ai.ai_turn(board)
 			gameboard.add_mark(cell, comp)
 			turn = 0
-			print()
 			print(msg[8])
 		gameboard.print_board()
 	
