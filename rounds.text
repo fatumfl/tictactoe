@@ -43,3 +43,4 @@
 ['X', 'O', None, 'O', 'O', 'X', None, 'X', 'X', 'X'] 	 player
 ['O', 'O', None, 'X', 'O', 'X', None, 'O', None, 'X'] 	 AI
 ['O', 'X', 'X', 'O', 'X', 'O', None, 'O', None, None] 	 AI
+['O', 'X', None, 'X', None, 'X', None, 'O', 'O', 'O'] 	 AI
