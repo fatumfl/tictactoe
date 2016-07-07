@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Tic-Tac-Toe by FatumFL
-# v0.1.4
+# v0.2
 
 from random import choice
 from sys import exit
@@ -152,7 +152,7 @@ def game_lvl():
 	return lvl
 
 def greeting():
-	# Defines who goes first and prints greeting.
+	# Defines who goes first and prints greeting. 'X' always first.
 	player = choice(['X', 'O'])
 	if player == 'X':
 		print(msg[1].format(player), msg[2])
