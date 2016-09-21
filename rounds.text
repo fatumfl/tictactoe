@@ -44,3 +44,6 @@
 ['O', 'O', None, 'X', 'O', 'X', None, 'O', None, 'X'] 	 AI
 ['O', 'X', 'X', 'O', 'X', 'O', None, 'O', None, None] 	 AI
 ['O', 'X', None, 'X', None, 'X', None, 'O', 'O', 'O'] 	 AI
+['X', 'X', 'O', 'X', None, 'O', 'X', 'O', None, 'X'] 	 player
+['X', 'X', 'O', 'X', None, 'O', 'X', 'O', None, 'X'] 	 player
+['tie', 'X', 'O', 'O', 'O', 'X', 'X', 'X', 'X', 'O'] 	 tie

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg>
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<rect width="300" height="300" fill="#BDBDBD" stroke="none"/>
+	
+	<line x1="100" y1="5" x2="100" y2="295" stroke="#757575" stroke-width="4"/>
+	<line x1="200" y1="5" x2="200" y2="295" stroke="#757575" stroke-width="4"/>
+	<line x1="5" y1="100" x2="295" y2="100" stroke="#757575" stroke-width="4"/>
+	<line x1="5" y1="200" x2="295" y2="200" stroke="#757575" stroke-width="4"/>
+	
+	<circle cx="150" cy="50" r="45" stroke="#689F38" stroke-width="6" fill="none"/>
+	
+	<line x1="5" y1="5" x2="95" y2="95" stroke="#FF9800" stroke-width="6"/>
+	<line x1="95" y1="5" x2="5" y2="95" stroke="#FF9800" stroke-width="6"/>
+	
+	<line x1="205" y1="5" x2="295" y2="95" stroke="#FF9800" stroke-width="6"/>
+	<line x1="295" y1="5" x2="205" y2="95" stroke="#FF9800" stroke-width="6"/>
+	
+	<text x="50" dy="165" fill="#757575" font-size="65" text-anchor="middle">tic</text>
+	<text x="150" y="165" fill="#757575" font-size="65" text-anchor="middle">tac</text>
+	<text x="250" y="165" fill="#757575" font-size="65" text-anchor="middle">toe</text>
+	
+	<line x1="20" y1="150" x2="280" y2="150" stroke="black" stroke-width="2"/>
+	
+	<circle cx="50" cy="250" r="45" stroke="#689F38" stroke-width="6" fill="none"/>
+	
+	<line x1="105" y1="205" x2="195" y2="295" stroke="#FF9800" stroke-width="6"/>
+	<line x1="195" y1="205" x2="105" y2="295" stroke="#FF9800" stroke-width="6"/>
+	
+	<circle cx="250" cy="250" r="45" stroke="#689F38" stroke-width="6" fill="none"/>
+
+</svg>
