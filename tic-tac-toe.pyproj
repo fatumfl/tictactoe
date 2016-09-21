@@ -5,14 +5,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{708a519e-c1e5-4e1e-85d8-ee2918ec9c34}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>gui.py</StartupFile>
+    <StartupFile>cli.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <InterpreterId>{67d9196a-37d7-431c-a405-6bcd6a1c276d}</InterpreterId>
-    <InterpreterVersion>3.4</InterpreterVersion>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -22,7 +24,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="cli.py" />
-    <Compile Include="gui.py" />
     <Compile Include="shared.py" />
   </ItemGroup>
   <ItemGroup>
@@ -37,9 +38,6 @@
   <ItemGroup>
     <Folder Include="pic\" />
     <Folder Include="pic\svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterpreterReference Include="{67d9196a-37d7-431c-a405-6bcd6a1c276d}\3.4" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
