@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{708a519e-c1e5-4e1e-85d8-ee2918ec9c34}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>gui.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>{67d9196a-37d7-431c-a405-6bcd6a1c276d}</InterpreterId>
+    <InterpreterVersion>3.4</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="cli.py" />
+    <Compile Include="gui.py" />
+    <Compile Include="shared.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pic\svg\bg.svg" />
+    <Content Include="pic\svg\circle.svg" />
+    <Content Include="pic\svg\cross.svg" />
+    <Content Include="pic\svg\example.svg" />
+    <Content Include="pic\svg\grid.svg" />
+    <Content Include="pic\svg\palette.svg" />
+    <Content Include="pic\svg\title.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pic\" />
+    <Folder Include="pic\svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{67d9196a-37d7-431c-a405-6bcd6a1c276d}\3.4" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>

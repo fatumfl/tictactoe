@@ -1,5 +1,0 @@
-<svg width="300" height="300">
-	<text x="50" dy="70" fill="red" font-size="65" text-anchor="middle">Tic</text>
-	<text x="150" y="170" fill="green" font-size="65" text-anchor="middle">Tac</text>
-	<text x="250" y="270" fill="blue" font-size="65" text-anchor="middle">Toe</text>
-</svg>
