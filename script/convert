@@ -1,2 +1,0 @@
-# Converting svg to png saving transparency in ImageMagick
-convert -background none in.svg out.png
