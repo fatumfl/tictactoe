@@ -49,3 +49,5 @@
 ['tie', 'X', 'O', 'O', 'O', 'X', 'X', 'X', 'X', 'O'] 	 tie
 ['tie', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'X', 'X'] 	 tie
 ['tie', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'X'] 	 tie
+['tie', 'X', 'O', 'X', 'X', 'O', 'X', 'O', 'X', 'O'] 	 tie
+['X', 'X', 'X', 'X', None, 'O', None, None, 'O', None] 	 player
