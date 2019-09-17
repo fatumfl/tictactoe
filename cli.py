@@ -58,7 +58,7 @@ def main():
 	comp_ai.lvl = game_lvl()
 	player, comp, turn = greeting()
 	comp_ai.mark = comp
-	
+
 	while gameboard.check_board() == 0:
 		board = gameboard.copy_board()
 		cells = gameboard.list_empty_cells()
@@ -72,7 +72,7 @@ def main():
 			turn = 0
 			print(msg[8])
 		gameboard.print_board()
-	
+
 	winner = gameboard.check_board()
 	print('\n' + msg[9], end=' ')
 	if winner == player:
@@ -84,7 +84,7 @@ def main():
 	if winner == "tie":
 		gameboard.store_board(winner)
 		print(msg[12])
-	
+
 	new_game_plus()
 
 if __name__ == "__main__":
