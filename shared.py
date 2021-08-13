@@ -22,14 +22,14 @@ msg = { # Applies a dictionary of all in-game messages.
 
 class Board(object):
 	# Gameboard
-	
+
 	def __init__ (self):
 		self.board = [0, None, None, None, None, None, None, None, None, None] # Initializing board in class instances
-	
+
 	def add_mark(self, i, mark):
 		# Add given mark to the specified cell of the board
 		self.board[i] = mark
-	
+
 	def print_board(self):
 		# Printing board to stdout
 		for i in range(1, 10):
@@ -39,7 +39,7 @@ class Board(object):
 				print(self.board[i], end=' ')
 			if i % 3 == 0:
 				print()
-	
+
 	def check_board(self):
 		# Is there a winner? Let me check...
 		if self.board[1] == self.board[2] == self.board[3] != None: # first row
@@ -61,15 +61,15 @@ class Board(object):
 		elif None not in self.board: # if board is full it's a tie
 			self.board[0] = "tie"
 		return self.board[0]
-	
+
 	def list_empty_cells(self):
 		# Return a list of empty cells
 		return [i for i in range(1, 10) if self.board[i] is None]
-	
+
 	def copy_board(self):
 		# Returns a copy of the board
 		return self.board[:]
-	
+
 	def store_board(self, winner):
 		# Writes game result to a file. Winner should be either 0 or 1.
 		if self.board[0]:
@@ -82,11 +82,11 @@ class Board(object):
 class AI(object):
 	# Your rival
 	# AI logick defined in functions _easy, _normal and _hard
-	
+
 	def __init__(self):
 		self.lvl = 1 # Defines game level
 		self.mark = ''
-	
+
 	def _easy(self, cells):
 		# Easy game level.
 		cell = choice(cells)
@@ -97,13 +97,13 @@ class AI(object):
 		localboard = Board()
 		localboard.board = board[:]
 		empty_cells = localboard.list_empty_cells()
-		
+
 		for i in empty_cells:
 			localboard.board = board[:]
 			localboard.add_mark(i, self.mark)
 			if localboard.check_board() == self.mark:
 				return i
-		
+
 		pl = "XO".replace(self.mark, '')
 		for i in empty_cells:
 			localboard.board = board[:]
@@ -122,11 +122,11 @@ class AI(object):
 			return choice(corner)
 		elif sides:
 			return choice(sides)
-		
-	
+
+
 	def ai_turn(self, board):
 		# Supports AI logic
-	
+
 		cells = [i for i in range(1, 10) if board[i] is None]
 
 		if self.lvl == 1:
